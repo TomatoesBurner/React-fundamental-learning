@@ -79,27 +79,27 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <div>
+
+      <ul className="pizzas">
         {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} />
+          <Pizza pizzaObj={pizza} key={pizza.name} />
         ))}
-      </div>
-      {}
-      <Pizza />
+      </ul>
     </main>
   );
 }
 // props
 function Pizza(props) {
+  console.log(props);
   return (
-    <div className="pizza">
-      <img src={props.pizzaObj.photoName} alt="Pizza spinaci" />
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
         <h3>{props.pizzaObj.name}</h3>
-        <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-        <span></span>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price + 3}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
