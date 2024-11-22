@@ -76,15 +76,20 @@ function Header() {
 
 // One component for Menu
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We're still working on our menu. Please come back later ：）</p>
+      )}
     </main>
   );
 }
@@ -107,15 +112,24 @@ function Pizza(props) {
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 8;
-  const closeHour = 22;
+  const closeHour = 21;
   const isOpen = hour >= openHour && hour <= closeHour;
-  console.log(isOpen);
 
   //   if (hour >= openHour && hour <= closeHour) alert("We're currentl open!");
   //   else alert("Sorry we're closed");
   return (
     <footer className="footer">
-      {new Date().toLocaleDateString()}.We're currently opening
+      {/*Conditional Rendering With Ternaries  */}
+      {isOpen ? (
+        <div className="order">
+          <p>We're open until {closeHour}:00. Com visit us or order online</p>
+          <button className="btn">order</button>
+        </div>
+      ) : (
+        <p>
+          we're happy to welcome you between {openHour}:00 and {closeHour}:00
+        </p>
+      )}
     </footer>
   );
   // return React.createElement("footer", null, "We're currently opening");
