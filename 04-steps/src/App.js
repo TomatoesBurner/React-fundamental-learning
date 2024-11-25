@@ -5,23 +5,38 @@ const messages = [
   "Apply for jobs =.=",
   "Invest your nex income",
 ];
+ export default function App(){
+   return (
+    <div>
+      <Steps />
+      <Steps />
+    </div>
+   )
 
-export default function App() {
+ }
+
+
+function Steps() {
   //return a arr
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
 
   function handlePrevious() {
-    if (step > 1) setStep(step - 1);
+    if (step > 1) {
+      // is a saft way to set hooks
+      setStep((s)=> s- 1)
+    }
   }
 
   function handleNext() {
-    if (step < 3) setStep(step + 1);
+    if (step < 3) {
+      setStep((s)=>s+1)
+    }
   }
 
   return (
-    <div>
-      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+    <>
+      <button className="close" onClick={() => setIsOpen((is)=>!is)}>
         &times;
       </button>
       {isOpen && (
@@ -50,6 +65,6 @@ export default function App() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
