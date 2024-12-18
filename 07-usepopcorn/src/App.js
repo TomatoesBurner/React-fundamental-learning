@@ -79,13 +79,15 @@ function Logo() {
 
 function Search() {
   const [query, setQuery] = useState("");
-  <input
-    className="search"
-    type="text"
-    placeholder="Search movies..."
-    value={query}
-    onChange={(e) => setQuery(e.target.value)}
-  />;
+  return (
+    <input
+      className="search"
+      type="text"
+      placeholder="Search movies..."
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+    />
+  );
 }
 
 function NumResults() {
@@ -97,21 +99,27 @@ function NumResults() {
 }
 
 function Main() {
-  <main className="main">
-    <ListBox />
-    <WatchedBox />
-  </main>;
+  return (
+    <main className="main">
+      <ListBox />
+      <WatchedBox />
+    </main>
+  );
 }
 
 function ListBox() {
   const [isOpen1, setIsOpen1] = useState(true);
-
-  <div className="box">
-    <button className="btn-toggle" onClick={() => setIsOpen1((open) => !open)}>
-      {isOpen1 ? "–" : "+"}
-    </button>
-    {isOpen1 && <MoiveList />}
-  </div>;
+  return (
+    <div className="box">
+      <button
+        className="btn-toggle"
+        onClick={() => setIsOpen1((open) => !open)}
+      >
+        {isOpen1 ? "–" : "+"}
+      </button>
+      {isOpen1 && <MoiveList />}
+    </div>
+  );
 }
 
 function MoiveList() {
@@ -195,25 +203,29 @@ function WatchedMoviesList({ watched }) {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <li key={movie.imdbID}>
-          <img src={movie.Poster} alt={`${movie.Title} poster`} />
-          <h3>{movie.Title}</h3>
-          <div>
-            <p>
-              <span>⭐️</span>
-              <span>{movie.imdbRating}</span>
-            </p>
-            <p>
-              <span>🌟</span>
-              <span>{movie.userRating}</span>
-            </p>
-            <p>
-              <span>⏳</span>
-              <span>{movie.runtime} min</span>
-            </p>
-          </div>
-        </li>
+        <WatchedMovie movie={movie} />
       ))}
     </ul>
   );
+}
+
+function WatchedMovie({ movie }) {
+  <li key={movie.imdbID}>
+    <img src={movie.Poster} alt={`${movie.Title} poster`} />
+    <h3>{movie.Title}</h3>
+    <div>
+      <p>
+        <span>⭐️</span>
+        <span>{movie.imdbRating}</span>
+      </p>
+      <p>
+        <span>🌟</span>
+        <span>{movie.userRating}</span>
+      </p>
+      <p>
+        <span>⏳</span>
+        <span>{movie.runtime} min</span>
+      </p>
+    </div>
+  </li>;
 }
